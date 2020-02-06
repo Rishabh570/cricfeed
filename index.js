@@ -1,37 +1,39 @@
 'use strict';
 const prompts = require('./lib/prompts'),
-	output = require('./lib/output'),
-	fetcher = require('./lib/fetcher'),
-	helper = require('./lib/helper'),
-	CLUI = require('clui'),
-	Spinner = CLUI.Spinner;
+	  output = require('./lib/output'),
+	  fetcher = require('./lib/fetcher'),
+	  helper = require('./lib/helper'),
+	  matchObs = require('./lib/matchObs'),
+	  CLUI = require('clui'),
+	  Spinner = CLUI.Spinner;
 
 
-// Prints "cricfeed"!
-output.printName();
+(async () => {
+	output.printName(); // Prints "cricfeed"
 
-// Prompts user for type of matches
-prompts.askTypeOfMatch().then(type => {
+	// Prompts user for type of matches
+	const type = await prompts.askTypeOfMatch();
+
 	// Loading spinner starts
-	const loadingMsg = helper.getLoadingMsg(type);
-	const status = new Spinner(loadingMsg);
-    status.start();
+	const spinner_first = helper.makeSpinner(type);
+	spinner_first.start();
 
-	// Shows user's choice of matches
-	type = JSON.parse(type);
 	// Fetches relevant live matches
-	fetcher.getLiveMatches().then(liveMatches => {
-		let matches = [];
-		liveMatches.forEach(element => {
-			if(element.srs_category.includes(type)) matches.push(element);
-		})
+	let liveMatches = await fetcher.getLiveMatches();
+	// Filter out matches according to the user's query
+	let matches = helper.getMatches(liveMatches, type);
 
-		const choices = helper.makeChoicesFromMatches(matches);
-		status.stop();
-		prompts.askForMatch(choices).then(match => {
-			const chosenMatchObj = JSON.parse(helper.findChosenMatchObj(match, matches));
-			// TODO: Show chosen match stats to the user.
-		})
+	// Create a list of choices that user needs to select from
+	const choices = helper.makeChoicesFromMatches(matches);
 
-	})
-})
+	spinner_first.stop(); // Stop the spinner
+
+	// Prompt the user to select a match from the list of choices
+	const match = await prompts.askForMatch(choices);
+
+	// Todo: ADD SPINNER HERE (THINK ABOUT EXPORTING THE SPINNER OBJECT)
+
+	const ID = matches[choices.indexOf(match)].match_id; // ID of the match user selected
+	matchObs(ID); // Create an observable that keeps track of the stats for the desired match and shows them to the user
+
+})();

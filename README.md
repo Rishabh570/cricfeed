@@ -1,3 +1,3 @@
 # CricFeed
 
-Gives you the real-time stats of cricket matches happening all around the world.
+Live cricket scores served at your terminal

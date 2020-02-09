@@ -1,27 +1,41 @@
 {
-  "name": "cricfeed",
-  "version": "1.0.0",
-  "description": "Live cricket scores served at your terminal 🏏",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "keywords": [
-		"CLI",
-		"Cricket"
-	],
-  "author": "Rishabh Rawat",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.19.2",
-    "boxen": "^4.2.0",
-    "chalk": "^3.0.0",
-    "clui": "^0.3.6",
-    "configstore": "^5.0.0",
-    "delay": "^4.3.0",
-    "figlet": "^1.2.4",
-    "inquirer": "^7.0.4",
-    "log-update": "^3.4.0",
-    "zen-observable": "^0.8.15"
-  }
+    "name": "cricfeed",
+    "version": "1.0.0",
+    "description": "Live cricket scores served at your terminal 🏏",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "lint": "eslint 'lib/**/*.{js,ts}' --fix",
+        "prettier": "prettier 'lib/**/*.{js,ts}' --write"
+    },
+    "keywords": [
+        "CLI",
+        "Cricket"
+    ],
+    "author": "Rishabh Rawat",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.19.2",
+        "boxen": "^4.2.0",
+        "chalk": "^3.0.0",
+        "clui": "^0.3.6",
+        "configstore": "^5.0.0",
+        "delay": "^4.3.0",
+        "figlet": "^1.2.4",
+        "inquirer": "^7.0.4",
+        "log-update": "^3.4.0",
+        "zen-observable": "^0.8.15"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.19.0",
+        "@typescript-eslint/parser": "^2.19.0",
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-plugin-import": "^2.20.1",
+        "husky": "^4.2.1",
+        "lint-staged": "^10.0.7",
+        "prettier": "^1.19.1",
+        "typescript": "^3.7.5"
+    }
 }

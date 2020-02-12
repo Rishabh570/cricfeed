@@ -28,6 +28,10 @@ const prompts = require('./lib/prompts'),
 
 	// Filter out matches according to the user's query
 	let matches = helper.getMatches(liveMatches, type);
+	if(matches.length == 0) {
+		spinner_first.stop(); // Stop the spinner
+		output.throwNoMatchesError(type);
+	}
 
 	// Create a list of choices that user needs to select from
 	const choices = helper.makeChoicesFromMatches(matches);
@@ -36,7 +40,7 @@ const prompts = require('./lib/prompts'),
 
 	// Prompt the user to select a match from the list of choices
 	const [match, matchErr] = await handler(prompts.askForMatch(choices));
-	if(matchErr) output.throwError('Could not fetch data for the match, please try again!')
+	if(matchErr) output.throwError('Could not fetch data for the match, please try again!');
 
 	// TODO: ADD SPINNER HERE (THINK ABOUT EXPORTING THE SPINNER OBJECT)
 

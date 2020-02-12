@@ -4,9 +4,8 @@ const prompts = require('./lib/prompts'),
 	  fetcher = require('./lib/fetcher'),
 	  helper = require('./lib/helper'),
 	  matchObs = require('./lib/matchObs'),
-	  CLUI = require('clui'),
-	  Spinner = CLUI.Spinner,
-	  {handler} = require('./lib/error_handler');
+	  {handler} = require('./lib/error_handler'),
+	  dns = require('dns');
 
 
 (async () => {
@@ -16,7 +15,10 @@ const prompts = require('./lib/prompts'),
 	const [type, typeErr] = await handler(prompts.askTypeOfMatch());
 	if(typeErr) output.throwError('Type of match not received, please select one!');
 
-	// TODO: Check user's internet connection and throw error if offline
+	// Check user's internet connection and throw error if offline
+	dns.lookup('google.com', err => {
+		if(err) output.throwError('No internet connection! ❌');
+	})
 
 	// Loading spinner starts
 	const spinner_first = helper.makeSpinner(type);

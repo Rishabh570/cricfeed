@@ -23,6 +23,7 @@
         "delay": "^4.3.0",
         "figlet": "^1.2.4",
         "inquirer": "^7.0.4",
+        "lodash": "^4.17.15",
         "log-update": "^3.4.0",
         "zen-observable": "^0.8.15"
     },

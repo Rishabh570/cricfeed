@@ -1,3 +1,6 @@
 module.exports = {
-    '*.{js,ts}': ['npm run lint', 'npm run prettier'],
+    '*.{js,ts}': [
+        // 'npm run lint',		// TODO: Un-Comment this later!
+        'npm run prettier',
+    ],
 };

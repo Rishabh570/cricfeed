@@ -305,41 +305,41 @@ parcelRequire = (function(e, r, t, n) {
         ],
         Focm: [
             function(require, module, exports) {
-                const e = require('./lib/prompts'),
-                    r = require('./lib/output'),
-                    t = require('./lib/fetcher'),
-                    o = require('./lib/helper'),
-                    a = require('./lib/matchObs'),
-                    {handler: c} = require('./lib/error_handler'),
-                    i = require('dns');
+                const e = require('dns'),
+                    r = require('./lib/prompts'),
+                    t = require('./lib/output'),
+                    o = require('./lib/fetcher'),
+                    a = require('./lib/helper'),
+                    c = require('./lib/matchObs'),
+                    {handler: i} = require('./lib/error_handler');
                 (async () => {
-                    r.printName();
-                    const [n, s] = await c(e.askTypeOfMatch());
+                    t.printName();
+                    const [n, s] = await i(r.askTypeOfMatch());
                     s &&
-                        r.throwError(
+                        t.throwError(
                             'Type of match not received, please select one!',
                         ),
-                        i.lookup('google.com', e => {
-                            e && r.throwError('No internet connection! ❌');
+                        e.lookup('google.com', e => {
+                            e && t.throwError('No internet connection! ❌');
                         });
-                    const h = o.makeSpinner(n);
+                    const h = a.makeSpinner(n);
                     h.start();
-                    const [l, p] = await c(t.getLiveMatches());
+                    const [l, p] = await i(o.getLiveMatches());
                     p &&
-                        r.throwError(
+                        t.throwError(
                             'Could not fetch live matches, please try again!',
                         );
-                    let u = o.getMatches(l, n);
-                    0 == u.length && (h.stop(), r.throwNoMatchesError(n));
-                    const m = o.makeChoicesFromMatches(u);
+                    let u = a.getMatches(l, n);
+                    0 == u.length && (h.stop(), t.throwNoMatchesError(n));
+                    const m = a.makeChoicesFromMatches(u);
                     h.stop();
-                    const [d, w] = await c(e.askForMatch(m));
+                    const [d, w] = await i(r.askForMatch(m));
                     w &&
-                        r.throwError(
+                        t.throwError(
                             'Could not fetch data for the match, please try again!',
                         );
                     const b = u[m.indexOf(d)].match_id;
-                    a(b);
+                    c(b);
                 })();
             },
             {

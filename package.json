@@ -7,7 +7,7 @@
         "start": "node ./dist/index.js",
         "lint": "eslint 'lib/**/*.{js,ts}' --fix",
 		"prettier": "prettier 'lib/**/*.{js,ts}' --write",
-		"dev": "parcel build index.js --target node",
+		"build": "parcel build index.js --target node",
 		"watch": "parcel watch index.js --target node"
     },
     "keywords": [

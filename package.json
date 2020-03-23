@@ -4,11 +4,12 @@
     "description": "Live cricket scores served at your terminal 🏏",
     "main": "index.js",
     "scripts": {
-        "start": "node ./dist/index.js",
+        "start": "nodemon --exec npm run babel",
+        "babel": "babel-node index.js",
         "lint": "eslint 'lib/**/*.{js,ts}' --fix",
-		"prettier": "prettier 'lib/**/*.{js,ts}' --write",
-		"build": "parcel build index.js --target node",
-		"watch": "parcel watch index.js --target node"
+        "prettier": "prettier 'lib/**/*.{js,ts}' --write",
+        "build": "parcel build index.js --target node",
+        "watch": "parcel watch index.js --target node"
     },
     "keywords": [
         "CLI",
@@ -25,10 +26,17 @@
         "delay": "^4.3.0",
         "figlet": "^1.2.4",
         "inquirer": "^7.0.4",
+        "lodash": "^4.17.15",
         "log-update": "^3.4.0",
         "zen-observable": "^0.8.15"
     },
     "devDependencies": {
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.9.0",
+        "@babel/node": "^7.8.7",
+        "@babel/plugin-transform-classes": "^7.9.0",
+        "@babel/plugin-transform-runtime": "^7.9.0",
+        "@babel/preset-env": "^7.9.0",
         "@typescript-eslint/eslint-plugin": "^2.19.0",
         "@typescript-eslint/parser": "^2.19.0",
         "eslint": "^6.8.0",
@@ -37,6 +45,7 @@
         "eslint-plugin-import": "^2.20.1",
         "husky": "^4.2.1",
         "lint-staged": "^10.0.7",
+        "nodemon": "^2.0.2",
         "parcel-bundler": "^1.12.4",
         "prettier": "^1.19.1",
         "typescript": "^3.7.5"
